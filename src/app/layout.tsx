@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Alef } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/providers/queryProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Alef({ subsets: ["latin"], weight: "400" });
 
@@ -18,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <TanStackProvider>{children}</TanStackProvider>
+        <TanStackProvider>
+          {children}
+          <Toaster />
+        </TanStackProvider>
       </body>
     </html>
   );

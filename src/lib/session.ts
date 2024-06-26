@@ -57,4 +57,5 @@ export const verifySession = async () => {
 };
 export const deleteSession = async () => {
   cookies().delete(cookieOption.name);
+  redirect("/sign-in")
 };

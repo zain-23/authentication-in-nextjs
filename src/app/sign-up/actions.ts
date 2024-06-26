@@ -1,11 +1,10 @@
 "use server";
-import { USER } from "@/model/user.model";
 import { connectDB } from "@/config/db";
+import { USER } from "@/model/user.model";
 import { signupSchema } from "@/schema/signup.schema";
-import { z } from "zod";
 import bycrypt from "bcrypt";
-import { createSession } from "@/lib/session";
-// import mongoose from "mongoose";
+import { z } from "zod";
+
 export async function signUp({ data }: { data: z.infer<typeof signupSchema> }) {
   // validate field
   const validationResult = signupSchema.safeParse({
@@ -30,8 +29,8 @@ export async function signUp({ data }: { data: z.infer<typeof signupSchema> }) {
     email: data.email,
     password: hashPassword,
   });
-  console.log(user);
 
-  // create session
-  await createSession(user._id);
+  return {
+    success: true,
+  };
 }

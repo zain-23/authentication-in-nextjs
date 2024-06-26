@@ -13,13 +13,12 @@ export default async function middleware(req: NextRequest) {
     const session = await decrypt(cookie!);
 
     if (!session?.userId) {
-      return NextResponse.redirect(new URL("/sign-up", req.nextUrl));
+      return NextResponse.redirect(new URL("/sign-in", req.nextUrl));
     }
-
     // return route
     return NextResponse.next();
   }
 }
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image).*)"],
+  matcher: ["/dashboard"],
 };

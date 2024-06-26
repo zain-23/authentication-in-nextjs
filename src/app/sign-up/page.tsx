@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -23,11 +24,17 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { signupSchema } from "@/schema/signup.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Signup = () => {
+  const router = useRouter();
   const { mutate: Signup, isPending, error } = useMutation({
     mutationKey: ["sign-up"],
     mutationFn: signUp,
+    onSuccess: () => {
+      router.push("/sign-in");
+    },
   });
 
   const signUpForm = useForm<z.infer<typeof signupSchema>>({
@@ -108,12 +115,19 @@ const Signup = () => {
                   </FormItem>
                 )}
               />
-              <Button isLoading={isPending} loadingText="Submitting..." disabled={isPending}>
+              <Button
+                isLoading={isPending}
+                loadingText="Submitting..."
+                disabled={isPending}
+              >
                 Submit
               </Button>
             </form>
           </Form>
         </CardContent>
+        <CardFooter>
+          Already have an account please <Link href={"/sign-in"} className="ml-1 text-primary"> login</Link>
+        </CardFooter>
       </Card>
     </div>
   );

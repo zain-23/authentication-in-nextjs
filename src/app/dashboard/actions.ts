@@ -2,6 +2,7 @@
 import { connectDB } from "@/config/db";
 import { decrypt, deleteSession, verifySession } from "@/lib/session";
 import { USER } from "@/model/user.model";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export const getUserDetails = async () => {
@@ -28,4 +29,5 @@ export const getUserDetails = async () => {
 
 export const logout = async () => {
   await deleteSession();
+  revalidatePath("/dashboard");
 };
