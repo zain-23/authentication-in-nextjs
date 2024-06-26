@@ -67,7 +67,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading ? (
           <LoaderPinwheel className="inline mr-2 animate-spin" />
         ) : null}
-        {loadingText ? loadingText : children}
+        {loadingText && isLoading ? loadingText : children}
       </Comp>
     );
   }
