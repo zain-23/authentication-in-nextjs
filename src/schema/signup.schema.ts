@@ -1,5 +1,12 @@
 import { z } from "zod";
 
+export const userEmail = z
+  .string({
+    required_error: "email is required",
+    invalid_type_error: "email must be a string",
+  })
+  .email({ message: "Invalid email address" });
+
 export const signupSchema = z.object({
   fullName: z.string({
     required_error: "full name is required",
@@ -13,12 +20,7 @@ export const signupSchema = z.object({
     .toLowerCase()
     .trim()
     .min(5, { message: "Must be 5 or more characters long" }),
-  email: z
-    .string({
-      required_error: "email is required",
-      invalid_type_error: "email must be a string",
-    })
-    .email({ message: "Invalid email address" }),
+  email: userEmail,
   password: z
     .string({
       required_error: "password is required",

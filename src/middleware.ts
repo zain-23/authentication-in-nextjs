@@ -4,7 +4,7 @@ import { decrypt } from "./lib/session";
 
 export default async function middleware(req: NextRequest) {
   // check if route is protected
-  const protectedRoutes = ["/dashboard"];
+  const protectedRoutes = ["/profile"];
   const currentPath = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(currentPath);
 
@@ -20,5 +20,5 @@ export default async function middleware(req: NextRequest) {
   }
 }
 export const config = {
-  matcher: ["/dashboard"],
+  matcher: ["/profile"],
 };

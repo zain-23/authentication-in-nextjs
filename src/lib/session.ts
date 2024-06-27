@@ -42,13 +42,13 @@ export const createSession = async (userId: string) => {
     ...cookieOption.options,
     expires,
   });
-  redirect("/dashboard");
+  redirect("/profile");
 };
 export const verifySession = async () => {
   const cookie = cookies().get(cookieOption.name)?.value;
   const session = await decrypt(cookie!);
 
-  if (session?.id) {
+  if (!session?.id) {
     redirect("/login");
   }
   return {

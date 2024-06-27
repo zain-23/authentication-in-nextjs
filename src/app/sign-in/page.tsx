@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -16,15 +17,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import { siginSchema } from "@/schema/signin.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { Eye } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Signin } from "./action";
-import { useMutation } from "@tanstack/react-query";
-import { useToast } from "@/components/ui/use-toast";
-import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
 
 const SignIn = () => {
   const { toast } = useToast();
@@ -100,12 +102,30 @@ const SignIn = () => {
                   </FormItem>
                 )}
               />
-              <Button isLoading={isPending} loadingText="Submitting...">
+              <Button
+                isLoading={isPending}
+                loadingText="Loading..."
+                disabled={isPending}
+              >
                 Submit
               </Button>
             </form>
           </Form>
         </CardContent>
+        <CardFooter className="flex justify-center">
+          <div>
+            Not a account{" "}
+            <Link href={"/sign-up"} className="mx-1 text-primary">
+              {" "}
+              register
+            </Link>
+            or
+            <Link href={"/sign-up"} className="text-primary">
+              {" "}
+              forgot password
+            </Link>
+          </div>
+        </CardFooter>
       </Card>
     </div>
   );

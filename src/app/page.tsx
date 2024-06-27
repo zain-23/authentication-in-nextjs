@@ -1,3 +1,5 @@
+import { VerificationEmailTemplate } from "@/emailTemplate/verificationEmail.teplate";
+
 export default function Home() {
-  return <></>;
+  return <VerificationEmailTemplate code="done" url="" />;
 }

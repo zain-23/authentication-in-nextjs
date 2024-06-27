@@ -19,6 +19,21 @@ const userModel = new Schema({
     type: String,
     required: [true, "password is required"],
   },
+  avatar: {
+    type: String,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    required: [true, "Verication token is required"],
+  },
+  verificationTokenExpirey: {
+    type: String,
+    required: [true, "Verication token expirey is required"],
+  },
 });
 
 export const USER = mongoose.models.User || mongoose.model("User", userModel);

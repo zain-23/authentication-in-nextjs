@@ -26,6 +26,7 @@ import { signupSchema } from "@/schema/signup.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast } from "@/components/ui/use-toast";
 
 const Signup = () => {
   const router = useRouter();
@@ -34,6 +35,12 @@ const Signup = () => {
     mutationFn: signUp,
     onSuccess: () => {
       router.push("/sign-in");
+    },
+    onError: (err) => {
+      toast({
+        title: err.message,
+        variant: "destructive",
+      });
     },
   });
 
@@ -117,7 +124,7 @@ const Signup = () => {
               />
               <Button
                 isLoading={isPending}
-                loadingText="Submitting..."
+                loadingText="Loading..."
                 disabled={isPending}
               >
                 Submit
@@ -125,8 +132,14 @@ const Signup = () => {
             </form>
           </Form>
         </CardContent>
-        <CardFooter>
-          Already have an account please <Link href={"/sign-in"} className="ml-1 text-primary"> login</Link>
+        <CardFooter className="flex justify-center">
+          <div>
+            Already have an account please{" "}
+            <Link href={"/sign-in"} className="ml-0.5 text-primary">
+              {" "}
+              login
+            </Link>
+          </div>
         </CardFooter>
       </Card>
     </div>
